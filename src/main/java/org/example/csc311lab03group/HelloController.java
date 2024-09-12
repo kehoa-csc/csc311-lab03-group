@@ -2,13 +2,14 @@ package org.example.csc311lab03group;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 
 public class HelloController {
     @FXML
-    private Label welcomeText;
+    private ImageView robot;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
+    private ImageView robetMaze;
+
+
 }
