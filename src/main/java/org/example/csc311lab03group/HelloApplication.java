@@ -15,8 +15,8 @@ public class HelloApplication extends Application {
         stage.setTitle("Maze");
         stage.setScene(scene);
         stage.show();
-        Droid mDroid = new Droid();
-        mDroid.autoRobot(mDroid.robot);
+
+
     }
 
     public static void main(String[] args) {

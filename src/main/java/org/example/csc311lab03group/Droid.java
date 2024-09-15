@@ -5,26 +5,29 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
+import javafx.event.ActionEvent;
 
 import java.io.IOException;
 
 public class Droid {
-    @FXML
-    Button robotStart;
+public ImageView robot;
+private  double [][] robotpath;
+public  int curr =0;
 
-    @FXML
-    ImageView robot;
+public Droid(ImageView robot, double [][]robotpath){
+    this.robot = robot;
+    this.robotpath= robotpath;
 
+}
 
-    public void autoRobot(ImageView robot){
-        this.robot = robot;
-        robotStart.onActionProperty(
+public void robotMov(){
+    if( curr < robotpath.length){
+        double nextX = robotpath[curr][0];
+        double nextY = robotpath[curr][1];
 
-        );
-
-
-
-
+        robot.setLayoutX(nextX);
+        robot.setLayoutY(nextY);
+        curr++;
     }
+}
 }
