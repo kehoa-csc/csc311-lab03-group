@@ -41,48 +41,43 @@ public class HelloController {
         colorText.setText(x+","+y+":" +color.toString());
 
          */
-        test();
+        test1();
     }
 
     // test class, no need to care
-    void test(){
-        Image finderImg = robot.getImage();
-        Image mazeImg = robetMaze.getImage();
-        int widthFinder = (int) finderImg.getWidth();
-        int heightFinder = (int) finderImg.getHeight();
-        int widthMaze = (int)mazeImg.getWidth() / widthFinder; // size of path should be able to allow finder passing
-        int heightMaze =(int)mazeImg.getHeight() / heightFinder;
-        colorText.setText(widthFinder + "," +heightFinder + " : "+mazeImg.getWidth()+ "," + mazeImg.getHeight());
+    void test1(){
+        Image maze = robetMaze.getImage();
+        int[][] mazeMap = imageTo2DArray(maze);
+
+        for(int[] i:mazeMap){
+            for (int j: i){
+                System.out.print(i+",");
+            }
+            System.out.println();
+        }
     }
 
     // translate the maze image to be a 2D Array, 0 is the path, 1 is the wall
-    void imageTo2DArray(Image finderImg, Image mazeImg){
-        // get width and height of finder and maze image
-        int widthFinder = (int) finderImg.getWidth();
-        int heightFinder = (int) finderImg.getHeight();
-        int widthMaze = (int)mazeImg.getWidth() / widthFinder; // size of path should be able to allow finder passing
-        int heightMaze =(int)mazeImg.getHeight() / heightFinder;
+    int[][] imageTo2DArray(Image mazeImg) {
+        // get width and height of maze image
+        int widthMaze = (int) mazeImg.getWidth();
+        int heightMaze = (int) mazeImg.getHeight();
 
         int[][] maze = new int[widthMaze][heightMaze];
 
         for (int i = 0; i < widthMaze; i++) {
             for (int j = 0; j < heightMaze; j++) {
-                boolean isWall = false;
-                for (int x = 0; x < widthFinder; x++) {
-                    for (int y = 0; y < heightFinder; y++) {
-                        int pixel = mazeImg.getPixelReader().getArgb(i * widthFinder + x, j * heightFinder + y);
-                        if (pixel != 0xFFFFFFFF) {
-                            isWall = true;
-                            break;
-                        }
-                    }
-                    if (isWall) break;
+
+                Color pixel = mazeImg.getPixelReader().getColor(i, j);
+                if (pixel == Color.WHITE) { // white is path is 0, other is wall is 1
+                    maze[i][j] = 0;
+                } else {
+                    maze[i][j] = 1;
                 }
-                maze[i][j] = isWall ? 1 : 0;
 
             }
-
         }
+        return maze;
     }
 
 
