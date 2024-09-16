@@ -11,32 +11,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="411.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.csc311lab03group.MazeController">
-  <tabs>
-    <Tab text="Robot Maze">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="361.0" prefWidth="567.0">
-               <children>
-                  <ImageView fx:id="robetMaze" fitHeight="364.0" fitWidth="509.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@maze.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="robot" fitHeight="22.0" fitWidth="23.0" layoutX="14.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@robot.png" />
-                     </image>
-                  </ImageView>
-                  <Button layoutX="517.0" layoutY="22.0" mnemonicParsing="false" onAction="#MoveRobot" text="Move" />
-                  <Button layoutX="518.0" layoutY="82.0" mnemonicParsing="false" onAction="#getColor" text="Color" />
-                  <Text fx:id="colorText" layoutX="519.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="57.30029296875" />
-               </children></AnchorPane>
-      </content>
-    </Tab>
-    <Tab text="Car Maze">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-      </content>
-    </Tab>
-  </tabs>
-</TabPane>
+<Pane fx:id="pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.csc311lab03group.MazeController">
+   <children>
+  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="592.0">
+         <children>
+            <ImageView fx:id="MazeView" fitHeight="364.0" fitWidth="509.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@maze.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="playerView" fitHeight="22.0" fitWidth="23.0" layoutX="14.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@robot.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="517.0" layoutY="22.0" mnemonicParsing="false" onAction="#MoveRobot" text="Move" />
+            <Text fx:id="colorText" layoutX="519.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="57.30029296875" />
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>

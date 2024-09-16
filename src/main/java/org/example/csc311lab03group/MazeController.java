@@ -1,66 +1,85 @@
 package org.example.csc311lab03group;
 
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelReader;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class MazeController {
     @FXML
-    private ImageView robot;
+    private ImageView playerView;
+
     @FXML
-    private ImageView robetMaze;
+    private ImageView MazeView;
     @FXML
     private Text colorText;
 
     @FXML
-    void MoveRobot(ActionEvent event) {
-        robot.setX(robot.getX()+5);
-        int x = (int)robot.getX();
-        int y = (int)robot.getY();
+    private Pane pane;
 
-        PixelReader pixelReader = robetMaze.getImage().getPixelReader();
-        Color color = pixelReader.getColor(x,y);
-        colorText.setText(x+","+y+":" +color.toString());
+    private int startX = 0;
+    private int startY = 0;
+    private int targetX = 100;
+    private int targetY = 0;
+    private int MOVE_STEP = 5;
+
+    @FXML
+    public void initialize(){
+        String path = "/org/example/csc311lab03group/";
+        Image playerImage = new Image(getClass().getResource(path+"robot.png").toExternalForm());
+        playerView.setImage(playerImage);
+
+        Image mazeImage = new Image(getClass().getResource(path+"maze.png").toExternalForm());
+        MazeView.setImage(mazeImage);
+
+        playerView.setX(startX);
+        playerView.setY(startY);
+
+
+
     }
 
     @FXML
-    void getColor(ActionEvent event) {
-        /*
-        robot.setY(robot.getY()+5);
-        int x = (int)robot.getX();
-        int y = (int)robot.getY();
-
-        PixelReader pixelReader = robetMaze.getImage().getPixelReader();
-        Color color = pixelReader.getColor(x,y);
-        colorText.setText(x+","+y+":" +color.toString());
-
-         */
-        //test1();
-    }
-
-    // test class, no need to care
-    void test1(){
-        Image maze = robetMaze.getImage();
-        int[][] mazeMap = imageTo2DArray(maze);
-
-       System.out.println(Arrays.deepToString(mazeMap));
-    }
-
-    void test2(){
-        Image maze = robetMaze.getImage();
-        int[][] mazeMap = imageTo2DArray(maze);
-
-        int x = (int)robot.getX();
-        int y = (int)robot.getY();
-
+    void MoveRobot(ActionEvent event) {
+        int[][] maze = imageTo2DArray(MazeView.getImage());
+        findPath(maze, startX, startY,targetX,targetY);
 
     }
+
+    public void handleKeyPress(KeyEvent event) {
+
+        switch (event.getCode()) {
+            case UP:
+                startY -= MOVE_STEP;
+                break;
+            case DOWN:
+                startY += MOVE_STEP;
+                break;
+            case LEFT:
+                startX -= MOVE_STEP;
+                break;
+            case RIGHT:
+                startX += MOVE_STEP;
+                break;
+            default:
+                break;
+        }
+        int[][] maze = imageTo2DArray(MazeView.getImage());
+        // update the robot position
+        if(canMove(maze,startX,startY)) {
+            setPlayer(startX, startY);
+        }
+    }
+
 
     // translate the maze image to be a 2D Array, 0 is the path, 1 is the wall
     int[][] imageTo2DArray(Image mazeImg) {
@@ -76,10 +95,8 @@ public class MazeController {
                 Color pixel =mazeImg.getPixelReader().getColor(i,j);
 
                 if (pixel.equals(Color.WHITE)) { // white is path is 0, other is wall is 1
-                    //System.out.println(0+" " + pixel);
                     maze[i][j] = 0;
                 } else {
-                    //System.out.println(1+" " + pixel);
                     maze[i][j] = 1;
                 }
 
@@ -87,55 +104,101 @@ public class MazeController {
         }
         return maze;
     }
-
-    // find the path in maze
-    boolean findPath(int[][] maze, int x,int y,int targetX, int targetY, boolean[][] visited) {
-        // define as up , down, right,left
-        final int[][] DIRECTIONS = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-
-        if(x == targetX && x == targetY){
-            setFinder(x, y);
-            return  true;
+    class Point{ // save x and y coordinate
+        int x, y;
+        Point(int x, int y) {
+            this.x = x;
+            this.y = y;
         }
+    }
 
-        visited[x][y] = true; // mark as passing
+    // find the path in maze , use BFS(Breadth-First Search)
+    boolean findPath(int[][] maze, int startX,int startY,int targetX, int targetY) {
+        // define as up , down, right,left
+        final int[][] DIRECTIONS = {{-25, 0}, {25, 0}, {0, -25}, {0, 25}};
 
-        for(int[] direction:DIRECTIONS){
-            int newX = x+direction[0];
-            int newY = y+direction[1];
 
-            // check new coordinate is valid
-            if(isVaild(maze,newX,newY,visited)){
-                if(findPath(maze,newX,newY,targetX,targetY,visited)){
-                    return  true;
+
+        boolean[][] visited = setVisited(maze);
+        Queue<Point> queue = new LinkedList<>();
+
+        queue.add(new Point(startX, startY)); // add start location point
+        visited[startX][startY] = true;
+
+        System.out.println("Queue is create "+ !queue.isEmpty());
+        while (!queue.isEmpty()) {
+            Point current = queue.poll();
+
+            // if the player in target coordinates
+            if (current.x == targetX && current.y == targetY) {
+                setPlayer(current.x, current.y);
+                System.out.println("find the path");
+                return true;
+            }
+
+            setPlayer(current.x, current.y); // update the location
+
+            // search four direction
+            for (int[] direction : DIRECTIONS) {
+                int newX = current.x + direction[0];
+                int newY = current.y + direction[1];
+
+                // check new coordinate is valid
+                if (isVaild(maze, newX, newY, visited)) {
+                    queue.add(new Point(newX, newY));
+                    visited[newX][newY] = true;
                 }
             }
         }
 
-
+        System.out.println("not found the path");
         return false;
 
     }
 
-    // set the robot going
-    void setFinder(int x, int y) {
+    // set visited array
+    boolean[][] setVisited(int[][] maze){
+        int width = maze[0].length;
+        int height = maze.length;
+
+        boolean[][] visited = new boolean[height][width];
+        return visited;
+    }
+    // let the robot going
+    void setPlayer(int x, int y) {
+
+        Platform.runLater(() -> {
+            playerView.setX(x);
+            playerView.setY(y);
+            colorText.setText(x +","+y);
+        });
+
         try {
-            robot.setX(x);
-            robot.setY(y);
             Thread.sleep(100);
         }catch (Exception e){
             e.printStackTrace();
         }
 
     }
-
-    boolean isVaild(int[][]maze, int x, int y, boolean[][]visited){
-        int n = maze.length;
-        // check it is in range , it is in the path(0 is path in maze), and it is visited
-        boolean result = (x >= 0 && y >= 0 &&x < n && y < n)&& (maze[x][y] == 0) && (visited[x][y]);
+    // check for keyboard moving
+    boolean canMove(int[][]maze, int x, int y){
+        int width = maze[0].length;
+        int height = maze.length;
+        // check it is in range , it is in the path(0 is path in maze)
+        boolean result = (x >= 0 && y >= 0 && x < height && y < width)&& (maze[x][y] == 0);
         return  result;
     }
 
+
+    boolean isVaild(int[][]maze, int x, int y, boolean[][]visited){
+        int width = maze[0].length;
+        int height = maze.length;
+        // check it is in range , it is in the path(0 is path in maze), and it is not visited
+        boolean result = (x >= 0 && y >= 0 && x < height && y < width)&& (maze[x][y] == 0) && (!visited[x][y]);
+        System.out.println(x +" " +y );
+        System.out.println("isValid " + result);
+        return  result;
+    }
 
 
 }
