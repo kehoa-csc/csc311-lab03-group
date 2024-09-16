@@ -12,7 +12,7 @@ import java.io.IOException;
 public class Droid {
 public ImageView robot;
 private double [][] robotpath;
-public int curr =0;
+
 
 public Droid(ImageView robot, double [][]robotpath){
     this.robot = robot;
@@ -20,14 +20,4 @@ public Droid(ImageView robot, double [][]robotpath){
 
 }
 
-public void robotMov(){
-    if (curr < robotpath.length) {
-        double nextX = robotpath[curr][0];
-        double nextY = robotpath[curr][1];
-
-        robot.setLayoutX(nextX);
-        robot.setLayoutY(nextY);
-        curr++;
-    }
-}
 }
