@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
@@ -26,7 +27,9 @@
                         <Image url="@robot.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="509.0" layoutY="23.0" mnemonicParsing="false" onAction="#MoveRobot" text="Button" />
+                  <Button layoutX="517.0" layoutY="22.0" mnemonicParsing="false" onAction="#MoveRobot" text="Move" />
+                  <Button layoutX="518.0" layoutY="82.0" mnemonicParsing="false" onAction="#getColor" text="Color" />
+                  <Text fx:id="colorText" layoutX="519.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="57.30029296875" />
                </children></AnchorPane>
       </content>
     </Tab>
