@@ -18,20 +18,19 @@ public class HelloController {
 
     private Droid droid;
 
-    public  int curr =0;
+    public int curr = 0;
 
-    private double[][] robotPath ={
-            {0,0}, {10,20}
+    private double[][] robotPath = {
+        {0,0}, {10,20}
     };
 
 
 
-
-    public HelloController( ImageView robot, double [][]robotpath){
+    /*public HelloController(ImageView robot, double [][]robotpath){
         this.robot = robot;
         this.robotPath= robotpath;
+    }*/
 
-    }
     @FXML
     public void robotMov() {
         if (curr < robotPath.length) {
