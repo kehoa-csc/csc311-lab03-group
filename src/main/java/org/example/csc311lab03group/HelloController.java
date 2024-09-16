@@ -10,6 +10,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+import java.util.Arrays;
+
 public class HelloController {
     @FXML
     private ImageView robot;
@@ -49,12 +51,7 @@ public class HelloController {
         Image maze = robetMaze.getImage();
         int[][] mazeMap = imageTo2DArray(maze);
 
-        for(int[] i:mazeMap){
-            for (int j: i){
-                System.out.print(i+",");
-            }
-            System.out.println();
-        }
+       System.out.println(Arrays.deepToString(mazeMap));
     }
 
     // translate the maze image to be a 2D Array, 0 is the path, 1 is the wall
@@ -68,10 +65,13 @@ public class HelloController {
         for (int i = 0; i < widthMaze; i++) {
             for (int j = 0; j < heightMaze; j++) {
 
-                Color pixel = mazeImg.getPixelReader().getColor(i, j);
-                if (pixel == Color.WHITE) { // white is path is 0, other is wall is 1
+                Color pixel =mazeImg.getPixelReader().getColor(i,j);
+
+                if (pixel.equals(Color.WHITE)) { // white is path is 0, other is wall is 1
+                    //System.out.println(0+" " + pixel);
                     maze[i][j] = 0;
                 } else {
+                    //System.out.println(1+" " + pixel);
                     maze[i][j] = 1;
                 }
 
