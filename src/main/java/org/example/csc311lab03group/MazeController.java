@@ -14,7 +14,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class MazeController {
@@ -82,12 +81,12 @@ public class MazeController {
         String maze = "maze.png";
         startX = 10;
         startY = 260;
-        targetX = 570;
+        targetX = 580;
         targetY = 245;
 
         loadImage(player,maze,startX,startY);
-        playerView.setFitWidth(25);
-        playerView.setFitHeight(25);
+        playerView.setFitWidth(20);
+        playerView.setFitHeight(20);
         playerView.setX(startX);
         playerView.setY(startY);
     }
@@ -97,13 +96,15 @@ public class MazeController {
         String maze = "maze2.png";
         startX = 10;
         startY = 70;
-        targetX = 500;
-        targetY = 345;
+        targetX = 430;
+        targetY = 290;
         loadImage(player,maze,startX,startY);
-        playerView.setFitWidth(65);
-        playerView.setFitHeight(65);
+        playerView.setFitWidth(40);
+        playerView.setFitHeight(20);
         playerView.setX(startX);
         playerView.setY(startY);
+
+
     }
 
 
@@ -115,13 +116,22 @@ public class MazeController {
         Image mazeImage = new Image(getClass().getResource(path+maze).toExternalForm());
         MazeView.setImage(mazeImage);
 
+        // set initial position of player
         playerView.setX(startX);
         playerView.setY(startY);
+
+        //set the size of imageview to its image
+        MazeView.setFitWidth(mazeImage.getWidth());
+        MazeView.setFitHeight(mazeImage.getHeight());
+        MazeView.setPreserveRatio(true);
+
+        //System.out.println(mazeImage.getWidth() + " " + mazeImage.getHeight());
+        //System.out.println(MazeView.getFitWidth() + " " + MazeView.getFitHeight());
 
     }
 
 
-
+    // keyboard controller
     public void handleKeyPress(KeyEvent event) {
 
         int X = (int)playerView.getX();
@@ -137,7 +147,8 @@ public class MazeController {
             }
         }
         int[][] mazeMap = imageTo2DArray(MazeView.getImage());
-        System.out.println(mazeMap[0].length +" "+mazeMap.length);
+        //System.out.println(mazeMap[0].length +" "+mazeMap.length);
+        //System.out.println(isValid(mazeMap,X,Y) + "："+X + " "+Y);
         // update the robot position
         if(isValid(mazeMap,X,Y)) {
             setPlayer(X, Y);
@@ -148,15 +159,17 @@ public class MazeController {
     int[][] imageTo2DArray(Image mazeImg) {
         // get width and height of maze image
         int widthMaze = (int) mazeImg.getWidth();
-        int heightMaze = (int) mazeImg.getHeight();
+        int heightMaze = (int)mazeImg.getHeight();
         //System.out.println(widthMaze + " " + heightMaze);
 
         int[][] maze = new int[widthMaze][heightMaze];
 
+
+
         for (int i = 0; i < widthMaze; i++) {
             for (int j = 0; j < heightMaze; j++) {
 
-                Color pixel =mazeImg.getPixelReader().getColor(i,j);
+                Color pixel =mazeImg.getPixelReader().getColor(i ,j);
 
                 if (pixel.equals(Color.WHITE)) { // white is path is 0, other is wall is 1
                     maze[i][j] = 0;
