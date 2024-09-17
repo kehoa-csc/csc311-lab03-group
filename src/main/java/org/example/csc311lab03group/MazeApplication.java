@@ -11,7 +11,7 @@ public class MazeApplication extends Application {
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("maze-view.fxml"));
         Parent root = loader.load();
-        Scene scene = new Scene(root,700,500);
+        Scene scene = new Scene(root);
 
         scene.setOnKeyPressed(event -> {
             MazeController controller = loader.getController();

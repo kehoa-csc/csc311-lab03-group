@@ -13,21 +13,23 @@
 
 <Pane fx:id="pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.csc311lab03group.MazeController">
    <children>
-  <AnchorPane layoutX="7.0" prefHeight="430.0" prefWidth="702.0">
+  <AnchorPane layoutX="7.0" prefHeight="430.0" prefWidth="727.0">
          <children>
-            <ImageView fx:id="MazeView" fitHeight="430.0" fitWidth="609.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="MazeView" fitHeight="430.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@maze.png" />
+                  <Image url="@maze2.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="playerView" fitHeight="22.0" fitWidth="23.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="playerView" fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@robot.png" />
+                  <Image url="@car.png" />
                </image>
             </ImageView>
-            <Button layoutX="617.0" layoutY="25.0" mnemonicParsing="false" onAction="#MoveRobot" text="Move" />
-            <Text fx:id="colorText" layoutX="612.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="57.30029296875" />
-            <Button layoutX="612.0" layoutY="81.0" mnemonicParsing="false" onAction="#Restart" text="Restart" />
+            <Button layoutX="608.0" layoutY="25.0" mnemonicParsing="false" onAction="#AntoPlay" prefHeight="30.0" prefWidth="105.0" text="AntoPlay" />
+            <Text fx:id="colorText" layoutX="614.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="93.30029296875" />
+            <Button layoutX="609.0" layoutY="81.0" mnemonicParsing="false" onAction="#clearAll" prefHeight="30.0" prefWidth="105.0" text="Clear All" />
+            <Button layoutX="608.0" layoutY="215.0" mnemonicParsing="false" onAction="#carMaze" prefHeight="30.0" prefWidth="105.0" text="carMaze" />
+            <Button layoutX="609.0" layoutY="280.0" mnemonicParsing="false" onAction="#RobotMaze" prefHeight="30.0" prefWidth="105.0" text="RobotMaze" />
          </children>
       </AnchorPane>
    </children>
