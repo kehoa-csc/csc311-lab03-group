@@ -13,6 +13,7 @@
 
 <Pane fx:id="pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.csc311lab03group.MazeController">
    <children>
+<<<<<<< Updated upstream
   <AnchorPane layoutX="7.0" prefHeight="430.0" prefWidth="702.0">
          <children>
             <ImageView fx:id="MazeView" fitHeight="430.0" fitWidth="609.0" pickOnBounds="true" preserveRatio="true">
@@ -29,5 +30,47 @@
             <Text fx:id="colorText" layoutX="612.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="57.30029296875" />
          </children>
       </AnchorPane>
+=======
+      <TabPane focusTraversable="false" prefHeight="471.0" prefWidth="709.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Maze 1">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                    <AnchorPane layoutX="4.0" layoutY="-31.0" prefHeight="430.0" prefWidth="702.0">
+                           <children>
+                              <ImageView fx:id="MazeView" fitHeight="430.0" fitWidth="609.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@maze.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="playerView" fitHeight="22.0" fitWidth="23.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@robot.png" />
+                                 </image>
+                              </ImageView>
+                              <Button focusTraversable="false" layoutX="609.0" layoutY="38.0" mnemonicParsing="false" onAction="#MoveRobot" text="Move" />
+                              <Text fx:id="colorText" layoutX="612.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="57.30029296875" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Maze 2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="430.0" fitWidth="609.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@maze2.png" />
+                           </image>
+                        </ImageView>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+>>>>>>> Stashed changes
    </children>
 </Pane>

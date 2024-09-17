@@ -34,7 +34,7 @@ public class MazeController {
     @FXML
     public void initialize(){
         String path = "/org/example/csc311lab03group/";
-        Image playerImage = new Image(getClass().getResource(path+"robot.png").toExternalForm());
+        Image playerImage = new Image(getClass().getResource(path+"car.png").toExternalForm());
         playerView.setImage(playerImage);
 
         Image mazeImage = new Image(getClass().getResource(path+"maze.png").toExternalForm());
