@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -80,22 +79,40 @@ public class MazeController {
         }
         int[][] maze = imageTo2DArray(MazeView.getImage());
         // update the robot position
-        if(canMove(maze,X,Y)) {
+        if(canMove(maze,X,Y,event)) {
             setPlayer(X, Y);
         }
     }
 
     // check for keyboard moving
-    boolean canMove(int[][]maze, int x, int y){
+    boolean canMove(int[][]maze, int x, int y,KeyEvent event){
+        int playerWidth = (int) playerView.getFitWidth();
+        int playerHeight = (int) playerView.getFitHeight();
+
+        switch (event.getCode()){
+            case UP:
+                // check top edge is the wall (0,-1) to (24,-1)
+                return isOk(maze,x,y-1)&&isOk(maze,x+playerWidth-1,y-1);
+            case DOWN:
+                // check down edge is the wall (0,25) to (24,25)
+                return isOk(maze,x,y+playerHeight)&&isOk(maze,x+playerWidth-1,y+playerHeight);
+            case LEFT:
+                // check left edge is the wall (-1,0) to (-1,24)
+                return isOk(maze,x-1,y)&&isOk(maze,x-1,y+playerHeight-1);
+            case RIGHT:
+                // check left edge is the wall (25,0) to (25,24)
+                return isOk(maze,x+playerWidth,y)&&isOk(maze,x+playerWidth,y+playerHeight-1);
+            default:
+                return  false;
+        }
+
+    }
+    boolean isOk(int[][]maze, int x, int y){
         int width = maze[0].length;
         int height = maze.length;
         // check it is in range , it is in the path(0 is path in maze)
-        boolean result = (x >= 0 && y >= 0 && x < height && y < width)&& (maze[x][y] == 0);
-        System.out.println(x +" " +y );
-        System.out.println("isValid " + result);
-        return  result;
+        return (x >= 0 && y >= 0 && x < height && y < width)&& (maze[x][y] == 0);
     }
-
 
     // translate the maze image to be a 2D Array, 0 is the path, 1 is the wall
     int[][] imageTo2DArray(Image mazeImg) {
@@ -159,7 +176,7 @@ public class MazeController {
                 int newY = current.y + direction[1];
 
                 // check new coordinate is valid
-                if (isVaild(maze, newX, newY, visited)) {
+                if (isValid(maze, newX, newY, visited)) {
                     queue.add(new Point(newX, newY));
                     visited[newX][newY] = true;
                 }
@@ -198,7 +215,7 @@ public class MazeController {
 
 
 
-    boolean isVaild(int[][]maze, int x, int y, boolean[][]visited){
+    boolean isValid(int[][]maze, int x, int y, boolean[][]visited){
         int width = maze[0].length;
         int height = maze.length;
         // check it is in range , it is in the path(0 is path in maze), and it is not visited
