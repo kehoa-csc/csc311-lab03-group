@@ -25,8 +25,9 @@
                   <Image url="@robot.png" />
                </image>
             </ImageView>
-            <Button layoutX="609.0" layoutY="25.0" mnemonicParsing="false" onAction="#MoveRobot" text="Move" />
+            <Button layoutX="617.0" layoutY="25.0" mnemonicParsing="false" onAction="#MoveRobot" text="Move" />
             <Text fx:id="colorText" layoutX="612.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="57.30029296875" />
+            <Button layoutX="612.0" layoutY="81.0" mnemonicParsing="false" onAction="#Restart" text="Restart" />
          </children>
       </AnchorPane>
    </children>
