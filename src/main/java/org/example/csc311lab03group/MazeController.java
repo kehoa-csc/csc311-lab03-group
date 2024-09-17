@@ -1,12 +1,12 @@
 package org.example.csc311lab03group;
 
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -26,8 +26,8 @@ public class MazeController {
     @FXML
     private Pane pane;
 
-    private int startX = 0;
-    private int startY = 0;
+    private int startX = 10;
+    private int startY = 260;
     private int targetX = 100;
     private int targetY = 0;
     private int MOVE_STEP = 5;
@@ -46,6 +46,7 @@ public class MazeController {
 
 
 
+
     }
 
     @FXML
@@ -55,29 +56,44 @@ public class MazeController {
 
     }
 
+
     public void handleKeyPress(KeyEvent event) {
+
+        int X = (int)playerView.getX();
+        int Y = (int)playerView.getY();
 
         switch (event.getCode()) {
             case UP:
-                startY -= MOVE_STEP;
+                Y -= MOVE_STEP;
                 break;
             case DOWN:
-                startY += MOVE_STEP;
+                Y += MOVE_STEP;
                 break;
             case LEFT:
-                startX -= MOVE_STEP;
+                X -= MOVE_STEP;
                 break;
             case RIGHT:
-                startX += MOVE_STEP;
+                X += MOVE_STEP;
                 break;
             default:
                 break;
         }
         int[][] maze = imageTo2DArray(MazeView.getImage());
         // update the robot position
-        if(canMove(maze,startX,startY)) {
-            setPlayer(startX, startY);
+        if(canMove(maze,X,Y)) {
+            setPlayer(X, Y);
         }
+    }
+
+    // check for keyboard moving
+    boolean canMove(int[][]maze, int x, int y){
+        int width = maze[0].length;
+        int height = maze.length;
+        // check it is in range , it is in the path(0 is path in maze)
+        boolean result = (x >= 0 && y >= 0 && x < height && y < width)&& (maze[x][y] == 0);
+        System.out.println(x +" " +y );
+        System.out.println("isValid " + result);
+        return  result;
     }
 
 
@@ -86,6 +102,7 @@ public class MazeController {
         // get width and height of maze image
         int widthMaze = (int) mazeImg.getWidth();
         int heightMaze = (int) mazeImg.getHeight();
+        //System.out.println(widthMaze + " " + heightMaze);
 
         int[][] maze = new int[widthMaze][heightMaze];
 
@@ -117,15 +134,13 @@ public class MazeController {
         // define as up , down, right,left
         final int[][] DIRECTIONS = {{-25, 0}, {25, 0}, {0, -25}, {0, 25}};
 
-
-
         boolean[][] visited = setVisited(maze);
         Queue<Point> queue = new LinkedList<>();
 
         queue.add(new Point(startX, startY)); // add start location point
         visited[startX][startY] = true;
 
-        System.out.println("Queue is create "+ !queue.isEmpty());
+        //System.out.println("Queue is create "+ !queue.isEmpty());
         while (!queue.isEmpty()) {
             Point current = queue.poll();
 
@@ -180,14 +195,7 @@ public class MazeController {
         }
 
     }
-    // check for keyboard moving
-    boolean canMove(int[][]maze, int x, int y){
-        int width = maze[0].length;
-        int height = maze.length;
-        // check it is in range , it is in the path(0 is path in maze)
-        boolean result = (x >= 0 && y >= 0 && x < height && y < width)&& (maze[x][y] == 0);
-        return  result;
-    }
+
 
 
     boolean isVaild(int[][]maze, int x, int y, boolean[][]visited){

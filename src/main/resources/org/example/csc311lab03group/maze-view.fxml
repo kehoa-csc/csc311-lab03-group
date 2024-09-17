@@ -13,20 +13,20 @@
 
 <Pane fx:id="pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.csc311lab03group.MazeController">
    <children>
-  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="592.0">
+  <AnchorPane layoutX="7.0" prefHeight="430.0" prefWidth="702.0">
          <children>
-            <ImageView fx:id="MazeView" fitHeight="364.0" fitWidth="509.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="MazeView" fitHeight="430.0" fitWidth="609.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@maze.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="playerView" fitHeight="22.0" fitWidth="23.0" layoutX="14.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="playerView" fitHeight="22.0" fitWidth="23.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@robot.png" />
                </image>
             </ImageView>
-            <Button layoutX="517.0" layoutY="22.0" mnemonicParsing="false" onAction="#MoveRobot" text="Move" />
-            <Text fx:id="colorText" layoutX="519.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="57.30029296875" />
+            <Button layoutX="609.0" layoutY="25.0" mnemonicParsing="false" onAction="#MoveRobot" text="Move" />
+            <Text fx:id="colorText" layoutX="612.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="57.30029296875" />
          </children>
       </AnchorPane>
    </children>
