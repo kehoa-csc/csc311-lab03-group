@@ -27,7 +27,7 @@ public class MazeController {
     private Pane pane;
 
     private int startX = 10;
-    private int startY = 260;
+    private int startY = 295;
     private int targetX = 100;
     private int targetY = 0;
     private int MOVE_STEP = 5;
