@@ -1,38 +1,59 @@
 package org.example.csc311lab03group;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.util.Duration;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Car implements KeyListener {
+import static org.example.csc311lab03group.HelloApplication.currKey;
+
+public class Car {
 
     private ImageView carImg;
 
-    public Car(ImageView carImg) {
+    private Timeline timeline;
+
+    private boolean canMove() {
+        //put here with the pixelReader if it can move.
+        return true;
+    }
+
+    public Car(ImageView carImg, Timeline timeline) {
         this.carImg = carImg;
         System.out.println("made car");
-    }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-        int key = e.getKeyCode();
-        carImg.setLayoutX(carImg.getLayoutX() + 10);
-        System.out.println(key);
-    }
+        timeline = new Timeline(new KeyFrame(Duration.seconds(0.01), new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(currKey.getName()=="Up" && carImg.getLayoutY()>=0) {
+                    carImg.setLayoutY(carImg.getLayoutY()-1);
+                } else if(currKey.getName()=="Down" && carImg.getLayoutY()<=500) {
+                    carImg.setLayoutY(carImg.getLayoutY()+1);
+                } else if(currKey.getName()=="Left" && carImg.getLayoutX()>=0) {
+                    carImg.setLayoutX(carImg.getLayoutX()-1);
+                } else if(currKey.getName()=="Right" && carImg.getLayoutX()<=700) {
+                    carImg.setLayoutX(carImg.getLayoutX()+1);
+                }
+            }
+        }));
 
-    @Override
-    public void keyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+        System.out.println("set timeline");
     }
 
 
 }
+
+
+
+
 
