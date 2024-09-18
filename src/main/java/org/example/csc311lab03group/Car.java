@@ -35,12 +35,20 @@ public class Car {
             public void handle(ActionEvent event) {
                 if(currKey.getName()=="Up" && carImg.getLayoutY()>=0) {
                     carImg.setLayoutY(carImg.getLayoutY()-1);
+                    carImg.setRotate(-90);
+                    carImg.setScaleX(1);
                 } else if(currKey.getName()=="Down" && carImg.getLayoutY()<=500) {
                     carImg.setLayoutY(carImg.getLayoutY()+1);
+                    carImg.setRotate(90);
+                    carImg.setScaleX(1);
                 } else if(currKey.getName()=="Left" && carImg.getLayoutX()>=0) {
                     carImg.setLayoutX(carImg.getLayoutX()-1);
+                    carImg.setRotate(0);
+                    carImg.setScaleX(-1);
                 } else if(currKey.getName()=="Right" && carImg.getLayoutX()<=700) {
                     carImg.setLayoutX(carImg.getLayoutX()+1);
+                    carImg.setRotate(0);
+                    carImg.setScaleX(1);
                 }
             }
         }));
