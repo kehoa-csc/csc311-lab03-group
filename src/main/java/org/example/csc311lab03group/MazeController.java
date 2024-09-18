@@ -139,12 +139,24 @@ public class MazeController {
 
         int MOVE_STEP = 5;
         switch (event.getCode()) {
-            case UP -> Y -= MOVE_STEP;
-            case DOWN -> Y += MOVE_STEP;
-            case LEFT -> X -= MOVE_STEP;
-            case RIGHT -> X += MOVE_STEP;
-            default -> {
-            }
+            case UP:
+                Y -= MOVE_STEP;
+                playerView.setRotate(-90);
+                break;
+            case DOWN:
+                Y += MOVE_STEP;
+                playerView.setRotate(90);
+                break;
+            case LEFT:
+                X -= MOVE_STEP;
+                playerView.setRotate(0);
+                break;
+            case RIGHT:
+                X += MOVE_STEP;
+                playerView.setRotate(0);
+                break;
+            default:
+                break;
         }
         int[][] mazeMap = imageTo2DArray(MazeView.getImage());
         //System.out.println(mazeMap[0].length +" "+mazeMap.length);
