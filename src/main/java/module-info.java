@@ -10,6 +10,7 @@ module org.example.csc311lab03group {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.desktop;
 
     opens org.example.csc311lab03group to javafx.fxml;
     exports org.example.csc311lab03group;
