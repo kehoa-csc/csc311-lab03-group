@@ -2,31 +2,31 @@ package org.example.csc311lab03group;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.util.*;
 
-public class MazeController {
+public class RobotMazeController {
+
+
     @FXML
-    private ImageView playerView;
+    private AnchorPane anchorPane;
 
     @FXML
     private ImageView MazeView;
-    @FXML
-    private Text colorText;
 
     @FXML
-    private Pane pane;
+     ImageView playerView;
 
     private final Group pathMarkers = new Group(); // Used to store path markers
 
@@ -38,10 +38,11 @@ public class MazeController {
     @FXML
     public void initialize(){
         loadRobotMaze();
-        pane.getChildren().add(pathMarkers); // Add path marker group to Pane
+        anchorPane.getChildren().add(pathMarkers); // Add path marker group to Pane
 
-
+        Platform.runLater(() -> anchorPane.requestFocus());
     }
+
 
     @FXML
     void AntoPlay(ActionEvent event) {
@@ -50,7 +51,7 @@ public class MazeController {
         int currY = (int)playerView.getY();
         findPath(mazeMap, currX, currY,targetX,targetY);
 
-        pane.requestFocus();
+        anchorPane.requestFocus();
     }
 
     @FXML
@@ -59,22 +60,10 @@ public class MazeController {
         playerView.setX(startX);
         playerView.setY(startY);
 
-        pane.requestFocus();
+        anchorPane.requestFocus();
 
     }
 
-    @FXML
-    void carMaze(ActionEvent event) {
-        loadCarMaze();
-        pane.requestFocus();
-    }
-
-    @FXML
-    void RobotMaze(ActionEvent event) {
-        loadRobotMaze();
-
-        pane.requestFocus();
-    }
     // a loading package for robot Maze
     void loadRobotMaze(){
         String player ="robot.png";
@@ -84,31 +73,14 @@ public class MazeController {
         targetX = 580;
         targetY = 245;
 
-        loadImage(player,maze,startX,startY);
+        loadImage(playerView,MazeView,player,maze,startX,startY);
         playerView.setFitWidth(20);
         playerView.setFitHeight(20);
         playerView.setX(startX);
         playerView.setY(startY);
     }
-    // a loading package for Car Maze
-    void loadCarMaze(){
-        String player ="car.png";
-        String maze = "maze2.png";
-        startX = 10;
-        startY = 70;
-        targetX = 430;
-        targetY = 290;
-        loadImage(player,maze,startX,startY);
-        playerView.setFitWidth(40);
-        playerView.setFitHeight(20);
-        playerView.setX(startX);
-        playerView.setY(startY);
 
-
-    }
-
-
-    public void loadImage(String player, String maze,int startX,int startY){
+    public void loadImage(ImageView playerView,ImageView MazeView,String player, String maze,int startX,int startY){
         String path = "/org/example/csc311lab03group/";
         Image playerImage = new Image(getClass().getResource(path+ player).toExternalForm());
         playerView.setImage(playerImage);
@@ -163,7 +135,8 @@ public class MazeController {
         //System.out.println(isValid(mazeMap,X,Y) + "："+X + " "+Y);
         // update the robot position
         if(isValid(mazeMap,X,Y)) {
-            setPlayer(X, Y);
+            playerView.setX(X);
+            playerView.setY(Y);
         }
     }
 
@@ -286,8 +259,6 @@ public class MazeController {
             timeline.getKeyFrames().add(new KeyFrame(Duration.millis(i * 5), event -> {
                 playerView.setX(step.x);
                 playerView.setY(step.y);
-                colorText.setText(step.x + "," + step.y);
-
                 // draw waypoints
                 drawPathMarker(step.x, step.y);
             }));
@@ -305,13 +276,6 @@ public class MazeController {
 
         // Add circles to pathMarkers group
         pathMarkers.getChildren().add(circle);
-    }
-
-    // shows the robot moving
-    void setPlayer(int x, int y) {
-        playerView.setX(x);
-        playerView.setY(y);
-        colorText.setText(x + "," + y);
     }
 
 

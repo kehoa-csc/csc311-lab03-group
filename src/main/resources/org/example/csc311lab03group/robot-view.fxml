@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.csc311lab03group.RobotMazeController">
+   <children>
+      <ImageView fx:id="MazeView" fitHeight="430.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@maze.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="playerView" fitHeight="22.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@robot.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="608.0" layoutY="25.0" mnemonicParsing="false" onAction="#AntoPlay" prefHeight="30.0" prefWidth="105.0" text="AntoPlay" />
+      <Button layoutX="609.0" layoutY="81.0" mnemonicParsing="false" onAction="#clearAll" prefHeight="30.0" prefWidth="105.0" text="Clear All" />
+   </children>
+</AnchorPane>

@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.example.csc311lab03group.Car"
-            prefHeight="400.0" prefWidth="600.0">
 
+
+<AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.csc311lab03group.CarMazeController">
+   <children>
+        <Button layoutX="608.0" layoutY="25.0" mnemonicParsing="false" onAction="#AntoPlay" prefHeight="30.0" prefWidth="105.0" text="AntoPlay" />
+        <ImageView fx:id="MazeView" fitHeight="430.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@maze2.png" />
+            </image>
+        </ImageView>
+        <Button layoutX="609.0" layoutY="81.0" mnemonicParsing="false" onAction="#clearAll" prefHeight="30.0" prefWidth="105.0" text="Clear All" />
+        <ImageView fx:id="playerView" fitHeight="77.0" fitWidth="83.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@car.png" />
+            </image>
+        </ImageView>
+   </children>
 </AnchorPane>
