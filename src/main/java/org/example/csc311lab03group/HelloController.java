@@ -25,6 +25,9 @@ public class HelloController {
     private Button carStart;
 
     @FXML
+    private Button robotStart;
+
+    @FXML
     private ImageView robetMaze;
 
     @FXML
@@ -35,14 +38,14 @@ public class HelloController {
 
     public int curr = 0;
     private Car car;
-
+    
     private double[][] robotPath = {
         {35,215},{35,120},{220,120},{220,75},{267,75},{267,265},{315,265},{315,170},{410,170},{410,80},{460,80}
             ,{460,200},{550,200}
     };
 
 
-    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), new EventHandler<ActionEvent>() {
     @Override
     public void handle(ActionEvent event) {
                 double nextX = robotPath[curr][0];
@@ -58,6 +61,7 @@ public class HelloController {
     public void robotMov() {
         timeline.setCycleCount(robotPath.length);
         timeline.play();
+        robotStart.setDisable(true);
     }
 
     @FXML
