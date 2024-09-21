@@ -14,6 +14,14 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class MazeController {
+
+/**
+ *
+ *
+ *  DO NOT USE
+ *
+ */
+
     @FXML
     private ImageView playerView;
 

@@ -7,9 +7,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="555.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.csc311lab03group.HelloController">
+<TabPane fx:id="tabPn" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="555.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.csc311lab03group.HelloController">
   <tabs>
-    <Tab text="Robot Maze">
+    <Tab closable="false" text="Robot Maze">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="361.0" prefWidth="567.0">
                <children>
@@ -23,13 +23,26 @@
                         <Image url="@robot.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="robotStart" layoutX="509.0" layoutY="1.0" mnemonicParsing="false" onAction="#robotMov" text="Start" />
+                  <Button fx:id="robotStart" focusTraversable="false" layoutX="509.0" layoutY="1.0" mnemonicParsing="false" onAction="#robotMov" text="Start" />
                </children></AnchorPane>
       </content>
     </Tab>
-    <Tab text="Car Maze">
+    <Tab closable="false" text="Car Maze">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="394.0" fitWidth="492.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@maze2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="carImg" fitHeight="13.0" fitWidth="30.0" layoutX="27.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@car.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="carStart" focusTraversable="false" layoutX="497.0" layoutY="27.0" mnemonicParsing="false" onAction="#makeCar" text="Start" />
+               </children></AnchorPane>
       </content>
     </Tab>
   </tabs>

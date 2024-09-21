@@ -6,6 +6,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ *
+ *
+ *  DO NOT USE
+ *
+ */
+
 public class MazeApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
