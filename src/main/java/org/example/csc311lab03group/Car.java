@@ -33,7 +33,6 @@ public class Car {
             public void handle(ActionEvent event) {
                 double nexY = carImg.getLayoutY();
                 double nexX = carImg.getLayoutX();
-                //System.out.println(nexX + " " + nexY);
                 if(currKey.getName().equals("Up") && nexY > 0 && canMove(nexX,nexY-1)) {
                     carImg.setLayoutY(nexY-1);
                     carImg.setRotate(-90);
