@@ -33,19 +33,20 @@ public class Car {
             public void handle(ActionEvent event) {
                 double nexY = carImg.getLayoutY();
                 double nexX = carImg.getLayoutX();
-                if(currKey.getName().equals("Up") && nexY >=0 && canMove(nexX,nexY-1)) {
+                //System.out.println(nexX + " " + nexY);
+                if(currKey.getName().equals("Up") && nexY > 0 && canMove(nexX,nexY-1)) {
                     carImg.setLayoutY(nexY-1);
                     carImg.setRotate(-90);
                     carImg.setScaleX(1);
-                } else if(currKey.getName().equals("Down") && nexY <=500 && canMove(nexX,nexY+1)) {
+                } else if(currKey.getName().equals("Down") && nexY < 350 && canMove(nexX,nexY+1)) {
                     carImg.setLayoutY(nexY+1);
                     carImg.setRotate(90);
                     carImg.setScaleX(1);
-                } else if(currKey.getName().equals("Left") && nexX >=0 && canMove(nexX-1,nexY)) {
+                } else if(currKey.getName().equals("Left") && nexX > 0 && canMove(nexX-1,nexY)) {
                     carImg.setLayoutX(nexX-1);
                     carImg.setRotate(0);
                     carImg.setScaleX(-1);
-                } else if(currKey.getName().equals("Right") && nexX <=700 && canMove(nexX+1,nexY)) {
+                } else if(currKey.getName().equals("Right") && nexX < 470 && canMove(nexX+1,nexY)) {
                     carImg.setLayoutX(nexX+1);
                     carImg.setRotate(0);
                     carImg.setScaleX(1);
@@ -60,7 +61,8 @@ public class Car {
 
     private boolean canMove (double x, double y) {
         //put here with the pixelReader if it can move.
-Color c = pr.getColor((int)x,(int) y);
-return c.equals(Color.WHITE);
+        Color c = pr.getColor((int)x,(int) y);
+
+        return c.equals(Color.WHITE);
     }
 }
