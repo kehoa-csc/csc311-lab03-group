@@ -67,7 +67,6 @@ public class HelloController {
 
     @FXML
     public void makeCar() {
-        //car = new Car(carImg, timeline);
         carStart.setFocusTraversable(false);
         tabPn.setFocusTraversable(false);
         tabPn.setDisable(true);
